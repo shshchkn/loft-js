@@ -71,6 +71,7 @@ function returnCounter(number) {
  */
 function bindFunction(fn) {
     var args = [];
+
     for (var i = 1; i < arguments.length; i++) {
         args[i] = arguments[i];
     }
