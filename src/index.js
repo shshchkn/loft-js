@@ -19,7 +19,7 @@ function defaultParameterValue(a, b) {
     if (b === undefined) {
         b = 100;
     }
-    var sum = a + b;
+    let sum = a + b;
     return sum;
 }
 
@@ -30,8 +30,8 @@ function defaultParameterValue(a, b) {
  Количество переданных аргументов заранее неизвестно
  */
 function returnArgumentsArray() {
-    var isArray = [];
-    for (var i = 0; i < arguments.length; i++) {
+    let isArray = [];
+    for (let i = 0; i < arguments.length; i++) {
         isArray.push(arguments[i]);
     }
     return isArray;
@@ -56,7 +56,7 @@ function returnCounter(number) {
     if (number === undefined) {
         number = 0;
     }
-    var F = function() {
+    let F = () => {
         number++;
         return number;
     }
@@ -70,11 +70,11 @@ function returnCounter(number) {
  Функция должна привязать переданные аргументы к функции F и вернуть получившуюся функцию
  */
 function bindFunction(fn) {
-    var args = [];
-    for (var i = 1; i < arguments.length; i++) {
+    let args = [];
+    for (let i = 1; i < arguments.length; i++) {
         args[i] = arguments[i];
     }
-    for (var k = 0; k < args.length; k++) {
+    for (let k = 0; k < args.length; k++) {
         fn = fn.bind(this, args[k]);
     }
     return fn;
