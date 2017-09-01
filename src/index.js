@@ -5,7 +5,7 @@
  Напишите аналог встроенного метода forEach для работы с массивами
  */
 function forEach(array, fn) {
-    for(var i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.length; i++) {
         fn(array[i], i, array);
     }
 }
@@ -15,10 +15,12 @@ function forEach(array, fn) {
  Напишите аналог встроенного метода map для работы с массивами
  */
 function map(array, fn) {
-    var newArray = [];
-    for(var i = 0; i < array.length; i++) {
+    let newArray = [];
+
+    for (var i = 0; i < array.length; i++) {
         newArray[i] = fn(array[i], i, array);
     }
+
     return newArray;
 }
 
@@ -27,11 +29,13 @@ function map(array, fn) {
  Напишите аналог встроенного метода reduce для работы с массивами
  */
 function reduce(array, fn, initial) {
-    var prev = (initial === undefined) ? array[0]: initial;
-    var i = initial ? 0: 1;
-    for(i; i < array.length; i++) {
+    let prev = (initial === undefined) ? array[0]: initial,
+        i = initial ? 0: 1;
+
+    for (i; i < array.length; i++) {
         prev = fn(prev, array[i], i, array);
     }
+
     return prev;
 }
 
@@ -50,9 +54,10 @@ function deleteProperty(obj, prop) {
  Функция должна проверить существует ли укзаанное свойство в указанном объекте
  */
 function hasProperty(obj, prop) {
-    if(prop in obj) {
+    if (prop in obj) {
         return true;
     }
+
     return false;
 }
 
@@ -69,10 +74,14 @@ function getEnumProps(obj) {
  Функция должна перебрать все свойства объекта, преобразовать их имена в верхний регистра и вернуть в виде массива
  */
 function upperProps(obj) {
-    var newArray = [];
-    for(var prop in obj) {
-        newArray.push(prop.toUpperCase());
+    let newArray = [];
+
+    for (let prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+            newArray.push(prop.toUpperCase());
+        }
     }
+
     return newArray;
 }
 
@@ -81,7 +90,7 @@ function upperProps(obj) {
  Напишите аналог встроенного метода slice для работы с массивами
  */
 function slice(array, from, to) {
-    var newArray = [];
+    let newArray = [];
 
     if (to === undefined || to > array.length - 1) {
         to = array.length;
@@ -116,9 +125,10 @@ function slice(array, from, to) {
  Proxy должен перехватывать все попытки записи значений свойств и возводить это значение в квадрат
  */
 function createProxy(obj) {
-    return new Proxy(obj,{
+    return new Proxy(obj, {
         set(target, prop, value) {
             target[prop] = Math.pow(value, 2);
+
             return true;
         }
     });
