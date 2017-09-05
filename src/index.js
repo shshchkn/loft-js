@@ -69,7 +69,13 @@ function returnCounter(number) {
  Функция должна принимать другую функцию (F) и некоторое количество дополнительных аргументов
  Функция должна привязать переданные аргументы к функции F и вернуть получившуюся функцию
  */
-function bindFunction(fn) {
+function bindFunction(fn, ...args) {
+    fn = fn.bind(null, ...args);
+    return fn;
+
+}
+
+/*function bindFunction(fn, ...args) {
     let args = [];
     for (let i = 1; i < arguments.length; i++) {
         args[i] = arguments[i];
@@ -78,7 +84,8 @@ function bindFunction(fn) {
         fn = fn.bind(this, args[k]);
     }
     return fn;
-}
+
+}*/
 
 /* Этот вариант я сделал уже после pull request
 function bindFunction(fn) {
