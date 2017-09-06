@@ -1,3 +1,7 @@
+const nativeSlice = Array.prototype.slice;
+const nativeMap = Array.prototype.map;
+const nativeReduce = Array.prototype.reduce;
+
 import { assert } from 'chai';
 import { randomValue } from '../helper';
 import {
@@ -39,7 +43,6 @@ describe('ДЗ 4 - Работа с DOM', () => {
             assert.equal(result.innerText, text);
         });
     });
-
     describe('createAWithHref', () => {
         it('должна возвращать элемент с тегом A', () => {
             let href = `http://${random('string')}.com`;
@@ -48,6 +51,8 @@ describe('ДЗ 4 - Работа с DOM', () => {
             assert.instanceOf(result, Element);
             assert.equal(result.tagName, 'A');
         });
+    });
+
 
         it('должна добавлять атрибут href', () => {
             let href = `http://${random('string')}.com`;
@@ -72,7 +77,7 @@ describe('ДЗ 4 - Работа с DOM', () => {
             assert.equal(where.firstChild, what);
             assert.equal(where.innerHTML, `<p>${whatText}</p>, <b>${whereText}</b>!`);
         });
-    });
+
 
     describe('findAllPSiblings', () => {
         it('должна возвращать массив с элементами, соседями которых являются P', () => {
@@ -111,7 +116,7 @@ describe('ДЗ 4 - Работа с DOM', () => {
 
             assert.equal(where.innerHTML, '<div></div><p></p>');
         });
-    });
+
 
     describe('deleteTextNodesRecursive', () => {
         it('должна рекурсивно удалить все текстовые узлы', () => {
@@ -126,6 +131,7 @@ describe('ДЗ 4 - Работа с DOM', () => {
             assert.equal(where.innerHTML, '<span><div><b></b></div><p></p></span>');
         });
     });
+
 
     describe('collectDOMStat', () => {
         it('должна вернуть статистику по переданному дереву', () => {
@@ -146,6 +152,7 @@ describe('ДЗ 4 - Работа с DOM', () => {
             assert.deepEqual(result, stat);
         });
     });
+
 
     describe('observeChildNodes', () => {
         it('должна вызывать fn при добавлении элементов в указанный элемент', done => {
@@ -171,7 +178,7 @@ describe('ДЗ 4 - Работа с DOM', () => {
 
             document.body.removeChild(where);
         });
-
+    });
         it('должна вызывать fn при добавлении множества элементов в указанный элемент', done => {
             let where = document.createElement('div');
             let fn = info => {
@@ -202,6 +209,8 @@ describe('ДЗ 4 - Работа с DOM', () => {
 
             document.body.removeChild(where);
         });
+    });
+
 
         it('должна вызывать fn при удалении элементов из указанного элемента', done => {
             let where = document.createElement('div');
