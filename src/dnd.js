@@ -25,17 +25,17 @@ let homeworkContainer = document.querySelector('#homework-container');
 function createDiv() {
     let docH = document.body.clientHeight,
         docW = document.body.clientWidth,
-        size = ((Math.random()*100) + 100).toFixed(),
+        size = ((Math.random()*100) + 100),
         el = document.createElement('div');
 
     el.className = 'draggable-div';
     el.setAttribute('draggable', 'true');
 
     el.style.position = 'absolute';
-    el.style.left = Math.floor(Math.random() * (docW - size)).toFixed() + 'px';
-    el.style.top = Math.floor(Math.random() * (docH - size)).toFixed() + 'px';
-    el.style.width = Math.floor(Math.random() * size).toFixed() + 'px';
-    el.style.height = Math.floor(Math.random() * size).toFixed() + 'px';
+    el.style.left = Math.floor(Math.random() * (docW - size)) + 'px';
+    el.style.top = Math.floor(Math.random() * (docH - size)) + 'px';
+    el.style.width = Math.floor(Math.random() * size) + 'px';
+    el.style.height = Math.floor(Math.random() * size) + 'px';
     el.style.backgroundColor = 'rgb('+ Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
 
     return el;
