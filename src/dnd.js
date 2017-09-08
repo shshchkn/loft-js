@@ -36,7 +36,7 @@ function createDiv() {
     el.style.top = Math.floor(Math.random() * (docH - size)).toFixed() + 'px';
     el.style.width = Math.floor(Math.random() * size).toFixed() + 'px';
     el.style.height = Math.floor(Math.random() * size).toFixed() + 'px';
-    el.style.backgroundColor = "rgb(" + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + ")";
+    el.style.backgroundColor = 'rgb('+ Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
 
     return el;
 }
