@@ -77,6 +77,7 @@ addDivButton.addEventListener('click', function() {
 
     // добавить на страницу
     homeworkContainer.appendChild(div);
+
     // назначить обработчики событий мыши для реализации d&d
     addListeners(div);
     // можно не назначать обработчики событий каждому div в отдельности, а использовать делегирование
