@@ -7,6 +7,11 @@
  * @return {Promise}
  */
 function delayPromise(seconds) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve();
+        }, seconds);
+    });
 }
 
 /**
