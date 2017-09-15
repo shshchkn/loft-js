@@ -52,6 +52,7 @@ function loadTowns() {
  * @return {boolean}
  */
 function isMatching(full, chunk) {
+    full
 }
 
 let loadingBlock = homeworkContainer.querySelector('#loading-block');
