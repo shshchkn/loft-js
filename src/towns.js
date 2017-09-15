@@ -36,6 +36,31 @@ let homeworkContainer = document.querySelector('#homework-container');
  * @return {Promise<Array<{name: string}>>}
  */
 function loadTowns() {
+    return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json', true);
+        xhr.responseType = 'json';
+        xhr.addEventListener('load', () => {
+            if (xhr.status === 200) {
+                let towns = xhr.response;
+
+                towns.sort((prev, next) => {
+                    if (prev.name > next.name) {
+                        return 1;
+                    }
+                    if (prev.name < next.name) {
+                        return -1;
+                    }
+                });
+
+                resolve(towns);
+            } else {
+                reject();
+            }
+        });
+        xhr.send();
+    });
 }
 
 /**
@@ -52,17 +77,34 @@ function loadTowns() {
  * @return {boolean}
  */
 function isMatching(full, chunk) {
-    full
+    return full.toLowerCase().includes(chunk.toLowerCase());
 }
+
 
 let loadingBlock = homeworkContainer.querySelector('#loading-block');
 let filterBlock = homeworkContainer.querySelector('#filter-block');
 let filterInput = homeworkContainer.querySelector('#filter-input');
 let filterResult = homeworkContainer.querySelector('#filter-result');
-let townsPromise;
 
-filterInput.addEventListener('keyup', function() {
-});
+filterBlock.style.display = "none";
+
+loadTowns()
+    .then((towns) => {
+        loadingBlock.style.display = "none";
+        filterBlock.style.display = "block";
+        filterInput.addEventListener('keyup', function () {
+            let value = this.value.trim();
+
+            filterResult.innerHTML = '';
+            if (value !== '') {
+                for (let i = 0; i < towns.length; i++) {
+                    if (isMatching(towns[i].name, value)) {
+                        filterResult.innerHTML += '<div>' + towns[i].name + '</div>';
+                    }
+                }
+            }
+        });
+    });
 
 export {
     loadTowns,
