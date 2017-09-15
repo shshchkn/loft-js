@@ -39,8 +39,65 @@ let addValueInput = homeworkContainer.querySelector('#add-value-input');
 let addButton = homeworkContainer.querySelector('#add-button');
 let listTable = homeworkContainer.querySelector('#list-table tbody');
 
+function isMatching(full, chunk) {
+    return full.toLowerCase().includes(chunk.toLowerCase());
+}
+
+function getCookies() {
+    return document.cookie
+        .split('; ')
+        .filter(Boolean)
+        .map(cookie => cookie.match(/^([^=]+)=(.+)/))
+        .reduce((obj, [, name, value]) => {
+            obj[name] = value;
+
+            return obj;
+        }, {});
+}
+
+function newRow(name, value) {
+    let row = document.createElement('tr'),
+        colName = document.createElement('td'),
+        colValue = document.createElement('td'),
+        colBtn = document.createElement('td'),
+        button = document.createElement('button');
+
+    colName.textContent = name;
+    colValue.textContent = value;
+    button.textContent = 'X';
+
+    row.appendChild(colName);
+    row.appendChild(colValue);
+    row.appendChild(colBtn);
+    colBtn.appendChild(button);
+
+    button.addEventListener('click', () => {
+        listTable.removeChild(button.closest('tr'));
+        document.cookie = `${name}=; expires=${new Date(0)}`;
+    });
+
+    listTable.appendChild(row);
+}
+
+function allCookies(search) {
+    let cookies = getCookies();
+
+    listTable.innerHTML = '';
+    Object.keys(cookies).forEach(name => {
+        if (isMatching(cookies[name], search) || isMatching(name, search)) {
+            newRow(name, cookies[name]);
+        }
+    });
+}
+
 filterNameInput.addEventListener('keyup', function() {
+    allCookies(filterNameInput.value);
 });
 
 addButton.addEventListener('click', () => {
+    let name = addNameInput.value,
+        value = addValueInput.value;
+
+    document.cookie = `${name}=${value}`;
+    allCookies(filterNameInput.value);
 });
